@@ -43,7 +43,7 @@ function createArchive(fileName, archive) {
     archive.pipe(output);
 
     archive.directory('private');
-   if (fs.existsSync(configFile)) {
+    if (fs.existsSync(configFile)) {
         archive.file(configFile);
     } else {
         console.warn(`Warning: ${configFile} does not exist, ignoring`.warn);
