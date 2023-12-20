@@ -26,6 +26,7 @@ createArchive(basename + '.zip', archiver('zip', {
 function createArchive(fileName, archive) {
     const filePath = path.normalize(path.join(archiveDir, fileName));
     const output = fs.createWriteStream(filePath);
+    const configFile = 'config/my.config.inc.php';
 
     archive.on('warning', function (err) {
         if (err.code === 'ENOENT') {
@@ -42,7 +43,11 @@ function createArchive(fileName, archive) {
     archive.pipe(output);
 
     archive.directory('private');
-    archive.file('config/my.config.inc.php');
+   if (fs.existsSync(configFile)) {
+        archive.file(configFile);
+    } else {
+        console.warn(`Warning: ${configFile} does not exist, ignoring`.warn);
+    }
 
     output.on('close', function () {
         console.log(`Wrote ${archive.pointer()} bytes to ${fileName}`.verbose);
