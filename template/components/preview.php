@@ -9,6 +9,10 @@ $previewShowPictureFrame = $config['preview']['showFrame'] && !empty($config['pi
 $previewShowCollageFrame = $config['preview']['showFrame'] && !empty($config['collage']['frame']);
 
 echo '<div class="preview">';
+echo '<video autoplay loop>';
+echo '<source src="private/clip.mp4" type="video/mp4">';
+echo 'Your browser does not support the video tag.';
+echo '</video>';
 echo '<video id="preview--video" class="' . $previewFlipClass . ' ' . $previewStyleClass . '" autoplay playsinline></video>';
 echo '<div id="preview--ipcam" class="' . $previewFlipClass . ' ' . $previewStyleClass . '"></div>';
 echo '<div id="preview--none">' . $languageService->translate('no_preview') . '</div>';
